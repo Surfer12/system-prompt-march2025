@@ -1,3 +1,5 @@
+import java.time.LocalDateTime
+
 plugins {
     java
     application
@@ -66,7 +68,7 @@ tasks.register("generateStoryTellerReport") {
         2. Technology gate exploration
         3. Creative principles visualization
         
-        Generated on: ${java.time.LocalDateTime.now()}
+        Generated on: ${LocalDateTime.now()}
         """.trimIndent())
         
         println("StoryTeller report generated at ${reportFile.absolutePath}")
@@ -118,4 +120,8 @@ tasks.register<Zip>("createSystemDistribution") {
 }
 
 // Default task
-defaultTasks("systemInfo") 
+defaultTasks("systemInfo")
+// Remove duplicate dependency declaration
+//dependencies {
+//    implementation 'org.yaml:snakeyaml:1.30'
+//} 
