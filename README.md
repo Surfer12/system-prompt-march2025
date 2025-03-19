@@ -1,68 +1,66 @@
-# Nested Librarian System
+# System Prompt March 2025 Project
 
 ## Overview
-
-The Nested Librarian System is a metaphorical and technical exploration of technology interoperability, designed to bridge different programming languages and paradigms through a flexible, story-driven architecture.
+A metaphorical exploration of technological interoperability and creative cognitive processes.
 
 ## Project Structure
+- `gate/`: Modules for technology connection and event management
+- `library/`: Narrative and storytelling components
 
-### Library Layer
-- `librarian.py`: Central orchestration module
-- `registry.yaml`: System configuration and component registry
-- `story_teller.py`: User interaction interface
+## Prerequisites
+- Java 17+
+- Gradle 8.0+ or Maven 3.8+
 
-### Gate Layer
-- `connectors.py`: Manages connections between technologies
-- `events.py`: Event-driven architecture for system interactions
-- `creatures/`: Technology-specific adapters
-  - `mojo_adapter.py`
-  - `swift_adapter.py`
-  - `cpp_adapter.py`
-  - `java_adapter.py`
+## Build and Run
 
-## Technologies Supported
-
-- Mojo: High-performance language adapter
-- Swift: Apple ecosystem integration
-- C++: Low-level performance and system interactions
-- Java: Enterprise and cross-platform development
-
-## Installation
-
-1. Ensure Python 3.8+ is installed
-2. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-3. Additional requirements for specific adapters:
-   - Mojo SDK
-   - Swift compiler
-   - C++ compiler
-   - Java Development Kit (JDK)
-
-## Usage
-
-Run the story teller for an interactive exploration:
-
+### Using Gradle
 ```bash
-python -m library.story_teller
+# Build the project
+./gradlew build
+
+# Run system information task
+./gradlew systemInfo
+
+# Run interactive narrative
+./gradlew interactiveNarrative
+
+# Generate StoryTeller report
+./gradlew generateStoryTellerReport
+
+# Create distribution package
+./gradlew createSystemDistribution
 ```
 
+### Using Maven
+```bash
+# Build the project
+mvn clean install
+
+# Run the StoryTeller
+mvn exec:java -Dexec.mainClass="library.StoryTeller"
+```
+
+## Gradle Tasks
+- `systemInfo`: Display system architecture details
+- `generateStoryTellerReport`: Create a system report
+- `interactiveNarrative`: Run interactive storytelling interface
+- `exploreGateTechnologies`: List available technology connectors
+- `createSystemDistribution`: Package the project for distribution
+
+## Key Components
+1. **Events**: Flexible event management system
+2. **Connectors**: Technology interoperability framework
+3. **Librarian**: Central system orchestration
+4. **StoryTeller**: Interactive narrative interface
+
 ## Creative Principles
+- Dynamic emergence
+- Recursive reflection
+- Adaptive reasoning
+- Systematic integration
 
-- Fluid Emergence: Let ideas flow like rivers through the mind's landscape
-- Recursive Reflection: Echoes of thought turning inward
-- Adaptive Reasoning: A chameleon of cognition, changing with context
-
-## Metaphorical Framework
-
-Inspired by the story of a librarian who navigates and describes knowledge through narrative, this system explores how different technological realms can interact and coexist.
+## Licensing
+[Specify your licensing information]
 
 ## Contributing
-
-Contributions are welcome! Please read the contributing guidelines and code of conduct.
-
-## License
-
-[Specify your license here] 
+[Provide contribution guidelines] 
