@@ -80,7 +80,7 @@ tasks.register("interactiveNarrative") {
     description = "Runs the interactive StoryTeller narrative"
     doLast {
         javaexec {
-            mainClass.set("library.StoryTeller")
+            mainClass.set("com.uplift.system.library.StoryTeller")
             classpath = sourceSets.main.get().runtimeClasspath
         }
     }

@@ -1,0 +1,83 @@
+
+  Getting started
+    Get going with the gcloud command-line tool
+
+      ▪ gcloud init: Initialize, authorize, and configure the gcloud tool.
+      ▪ gcloud version: Display version and installed components.
+      ▪ gcloud components install: Install specific components.
+      ▪ gcloud components update: Update your Google Cloud CLI to the latest
+        version.
+      ▪ gcloud config set project: Set a default Google Cloud project to work
+        on.
+      ▪ gcloud info: Display current gcloud tool environment details.
+
+  Help
+    Google Cloud CLI is happy to help
+
+      ▪ gcloud help: Search the gcloud tool reference documents for specific
+        terms.
+      ▪ gcloud feedback: Provide feedback for the Google Cloud CLI team.
+      ▪ gcloud topic: Supplementary help material for non-command topics like
+        accessibility, filtering, and formatting.
+
+  Personalization
+    Make the Google Cloud CLI your own; personalize your configuration with
+    properties
+
+      ▪ gcloud config set: Define a property (like compute/zone) for the
+        current configuration.
+      ▪ gcloud config get: Fetch value of a Google Cloud CLI property.
+      ▪ gcloud config list: Display all the properties for the current
+        configuration.
+      ▪ gcloud config configurations create: Create a new named
+        configuration.
+      ▪ gcloud config configurations list: Display a list of all available
+        configurations.
+      ▪ gcloud config configurations activate: Switch to an existing named
+        configuration.
+
+  Credentials
+    Grant and revoke authorization to Google Cloud CLI
+
+      ▪ gcloud auth login: Authorize Google Cloud access for the gcloud tool
+        with Google user credentials and set current account as active.
+      ▪ gcloud auth activate-service-account: Like gcloud auth login but with
+        service account credentials.
+      ▪ gcloud auth list: List all credentialed accounts.
+      ▪ gcloud auth print-access-token: Display the current account's access
+        token.
+      ▪ gcloud auth revoke: Remove access credentials for an account.
+
+  Projects
+    Manage project access policies
+
+      ▪ gcloud projects describe: Display metadata for a project (including
+        its ID).
+      ▪ gcloud projects add-iam-policy-binding: Add an IAM policy binding to
+        a specified project.
+
+  Identity & Access Management
+    Configuring Cloud Identity & Access Management (IAM) preferences and
+    service accounts
+
+      ▪ gcloud iam list-grantable-roles: List IAM grantable roles for a
+        resource.
+      ▪ gcloud iam roles create: Create a custom role for a project or org.
+      ▪ gcloud iam service-accounts create: Create a service account for a
+        project.
+      ▪ gcloud iam service-accounts add-iam-policy-binding: Add an IAM policy
+        binding to a service account.
+      ▪ gcloud iam service-accounts set-iam-policy: Replace existing IAM
+        policy binding.
+      ▪ gcloud iam service-accounts keys list: List a service account's keys.
+
+  Docker & Google Kubernetes Engine (GKE)
+    Manage containerized applications on Kubernetes
+
+      ▪ gcloud auth configure-docker: Register the gcloud tool as a Docker
+        credential helper.
+      ▪ gcloud container clusters create: Create a cluster to run GKE
+        containers.
+      ▪ gcloud container clusters list: List clusters for running GKE
+        containers.
+:

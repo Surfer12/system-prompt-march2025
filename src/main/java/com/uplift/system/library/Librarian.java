@@ -1,3 +1,5 @@
+package com.uplift.system.library;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
@@ -13,7 +15,7 @@ import org.yaml.snakeyaml.Yaml;
  */
 public class Librarian {
     private Map<String, Object> registry;
-    private static final String DEFAULT_REGISTRY_PATH = "library/registry.yaml";
+    private static final String DEFAULT_REGISTRY_PATH = "config/registry.yaml";
 
     /**
      * Initialize the Librarian with the system's registry.

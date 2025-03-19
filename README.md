@@ -4,12 +4,30 @@
 A metaphorical exploration of technological interoperability and creative cognitive processes.
 
 ## Project Structure
-- `gate/`: Modules for technology connection and event management
-- `library/`: Narrative and storytelling components
+- `src/main/java/com/uplift/system/`: Java source code
+  - `gate/`: Modules for technology connection and event management
+  - `library/`: Narrative and storytelling components
+- `src/main/python/uplift/system/`: Python modules
+  - `gate/`: Python equivalents of gate functionality
+  - `library/`: Python storytelling components
+- `src/main/cpp/uplift/system/`: C++ components
+- `src/main/swift/uplift/system/`: Swift components
+- `src/main/mojo/uplift/system/`: Mojo components
+- `src/test/`: Test code for all languages
+- `config/`: Configuration files
+- `docs/`: Documentation
+  - `specs/`: Technical specifications
+  - `guides/`: User guides
+  - `api/`: API documentation
+  - `examples/`: Example code and usage
+- `scripts/`: Utility scripts
 
 ## Prerequisites
 - Java 17+
 - Gradle 8.0+ or Maven 3.8+
+- Python 3.9+
+- Magic package management
+- Max engine (for Mojo integration)
 
 ## Build and Run
 
@@ -37,15 +55,18 @@ A metaphorical exploration of technological interoperability and creative cognit
 mvn clean install
 
 # Run the StoryTeller
-mvn exec:java -Dexec.mainClass="library.StoryTeller"
+mvn exec:java -Dexec.mainClass="com.uplift.system.library.StoryTeller"
 ```
 
-## Gradle Tasks
-- `systemInfo`: Display system architecture details
-- `generateStoryTellerReport`: Create a system report
-- `interactiveNarrative`: Run interactive storytelling interface
-- `exploreGateTechnologies`: List available technology connectors
-- `createSystemDistribution`: Package the project for distribution
+### Using Python
+```bash
+# Install the package
+cd src/main/python
+pip install -e .
+
+# Run the Python StoryTeller
+python -m uplift.system.library.story_teller
+```
 
 ## Key Components
 1. **Events**: Flexible event management system
@@ -60,7 +81,7 @@ mvn exec:java -Dexec.mainClass="library.StoryTeller"
 - Systematic integration
 
 ## Licensing
-[Specify your licensing information]
+MIT License
 
 ## Contributing
-[Provide contribution guidelines] 
+Please see our contribution guidelines in docs/guides/contributing.md. 
