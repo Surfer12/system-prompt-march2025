@@ -27,7 +27,7 @@ public class Connectors {
      * Manages connections and interactions between different technologies.
      */
     public static class InteroperabilityManager {
-        private Map<String, TechnologyConnector> connectors;
+      final private Map<String, TechnologyConnector> connectors;
 
         /**
          * Initialize the InteroperabilityManager.
