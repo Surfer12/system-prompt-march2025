@@ -1,0 +1,9 @@
+PyYAML==6.0.1
+jpype1==1.4.1
+typing-extensions==4.7.1
+
+# Optional dependencies for specific adapters
+# Mojo: Requires Mojo SDK (not a Python package)
+# Swift: Requires Swift compiler and Xcode
+# C++: Requires C++ compiler
+# Java: Requires JDK 
