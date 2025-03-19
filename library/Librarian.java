@@ -1,11 +1,9 @@
-package library;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.yaml.snakeyaml.Yaml;
 
 /**
  * The Librarian: Central Orchestration Module
@@ -15,6 +13,7 @@ import org.yaml.snakeyaml.Yaml;
  */
 public class Librarian {
     private Map<String, Object> registry;
+    protected Map<String, Object> yaml; 
 
     /**
      * Initialize the Librarian with the system's registry.
