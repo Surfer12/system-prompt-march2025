@@ -1,0 +1,5 @@
+{
+    "accessibility.voice.autoSynthesize": "on",
+    "accessibility.voice.speechTimeout": 2700,
+    "accessibility.voice.speechLanguage": "en-US"
+}
