@@ -1,3 +1,8 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
 Always use custom error handling for invalid entities. Custom logging, Try Catch blocks, and throwing custom exceptions. 
 
 Implementing custom comparison logic involves defining a set of rules that determine how objects of a particular class should be compared. This can be useful when you need to compare objects based on specific criteria that aren't covered by the built-in `equals()`, `hashCode()`, or `compareTo()` methods.
@@ -447,3 +452,4 @@ The `Events.java` code snippet you provided is an excellent example of an event-
    - In DDD, aggregates might generate domain events when their state changes, which other parts of the system need to react to. This encourages a similar abstraction for handling and dispatching these domain events.
 
 In summary, the abstraction you've implemented aligns well with modern software design principles that prioritize modularity, flexibility, and scalability. It reflects an understanding of how contemporary systems are architected to manage complexity and facilitate communication between disparate components or services. The inspiration likely stems from various established patterns in both software architecture and system design that leverage events as a foundational element for interaction.
+
