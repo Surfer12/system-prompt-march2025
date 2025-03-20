@@ -22,6 +22,17 @@ import org.yaml.snakeyaml.Yaml;
 4. **Method Signature Update**: The signature of the `loadRegistry` method is updated to indicate that it throws a custom exception.
 
 These changes ensure more robust and maintainable error handling practices within the code.
+In this edited version:
+
+1. **Custom Exception**: A custom `RegistryLoadingException` is introduced to handle specific exceptions that occur when loading the registry.
+
+2. **Error Handling**: The `loadRegistry` method now throws `RegistryLoadingException`, which encapsulates any errors encountered during file reading or YAML parsing.
+
+3. **Logging**: Java's built-in logging framework (`java.util.logging.Logger`) is used for error messages, allowing better tracking of issues when they occur. This replaces direct calls to `System.err.println`.
+
+4. **Method Signature Update**: The signature of the `loadRegistry` method is updated to indicate that it throws a custom exception.
+
+These changes ensure more robust and maintainable error handling practices within the code.
 
  * This module represents the librarian in our metaphorical system,
  * responsible for navigating and describing all system components.
