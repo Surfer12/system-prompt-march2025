@@ -4,11 +4,17 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.function.Consumer;
 
 import com.uplift.system.gate.EnhancedEventManager;
+import com.uplift.system.gate.Events;
 import com.uplift.system.gate.Events.Event;
 import com.uplift.system.gate.Events.EventType;
 
+/**
+ * Enhanced Librarian that extends the base Librarian class with priority
+ * queueing for knowledge retrieval and hierarchical knowledge organization.
+ */
 public class EnhancedLibrarian extends Librarian {
     // Priority queue for knowledge retrieval requests
     private PriorityQueue<KnowledgeRequest> requestQueue;
@@ -54,8 +60,8 @@ public class EnhancedLibrarian extends Librarian {
         payload.put("context", context);
         payload.put("priority", priority);
         
-        Event event = eventManager.createPriorityEvent(
-            EventType.SYSTEM_NOTIFICATION,
+        Events.Event event = eventManager.createPriorityEvent(
+            Events.EventType.SYSTEM_NOTIFICATION,
             "Librarian",
             "RequestQueue",
             priority
@@ -97,8 +103,8 @@ public class EnhancedLibrarian extends Librarian {
         payload.put("parentKey", parentKey);
         payload.put("childCount", childData.size());
         
-        Event event = eventManager.createPriorityEvent(
-            EventType.SYSTEM_NOTIFICATION,
+        Events.Event event = eventManager.createPriorityEvent(
+            Events.EventType.SYSTEM_NOTIFICATION,
             "Librarian",
             "KnowledgeHierarchy",
             5

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.uplift.system.interop.adapters.JavaEntityAdapter;
 import com.uplift.system.interop.adapters.PythonEntityAdapter;
-import com.uplift.system.util.DataProcessor;
+import com.uplift.system.util.EnhancedLibrarian;
 import com.uplift.system.util.Librarian;
 
 /**
@@ -73,11 +73,15 @@ public class LibrarianSystemDemo {
             
             // Process tasks in priority order (Python will be processed first due to higher priority)
             System.out.println("Processing tasks in priority order:");
-            Object pythonResult = dataProcessor.processNextTask();
-            System.out.println("Python result (priority 1): " + pythonResult);
-            
-            Object javaResult = dataProcessor.processNextTask();
-            System.out.println("Java result (priority 2): " + javaResult);
+            try {
+                Object pythonResult = dataProcessor.processNextTask();
+                System.out.println("Python result (priority 1): " + pythonResult);
+                
+                Object javaResult = dataProcessor.processNextTask();
+                System.out.println("Java result (priority 2): " + javaResult);
+            } catch (Exception e) {
+                System.err.println("Error processing tasks: " + e.getMessage());
+            }
             
             System.out.println("\nLibrarian System Demo completed successfully!");
         } catch (Exception e) {

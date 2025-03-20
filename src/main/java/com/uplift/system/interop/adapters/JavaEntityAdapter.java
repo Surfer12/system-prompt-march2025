@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.uplift.system.interop.EntityAdapter;
 import com.uplift.system.interop.InteropEntityAdapter;
 import com.uplift.system.interop.InteropException;
 
@@ -17,7 +18,7 @@ import com.uplift.system.interop.InteropException;
  * Provides interoperability with Java components using doubly linked data structures
  * for efficient data transformation and traversal.
  */
-public class JavaEntityAdapter implements InteropEntityAdapter {
+public class JavaEntityAdapter implements InteropEntityAdapter, EntityAdapter {
     private static final Logger logger = Logger.getLogger(JavaEntityAdapter.class.getName());
     
     private boolean connected;
@@ -231,6 +232,15 @@ public class JavaEntityAdapter implements InteropEntityAdapter {
         }
         
         throw new InteropException("Unsupported data type for transformation: " + (data != null ? data.getClass().getName() : "null"), null);
+    }
+    
+    @Override
+    public Object processData(String data) throws Exception {
+        // Simple demonstration - in a real system this would compile and run Java code
+        System.out.println("Processing Java code: " + data);
+        
+        // Return a mock result
+        return "Processed Java: " + data;
     }
     
     /**

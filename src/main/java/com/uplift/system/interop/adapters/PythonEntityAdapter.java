@@ -1,5 +1,7 @@
 package com.uplift.system.interop.adapters;
 
+import com.uplift.system.interop.EntityAdapter;
+
 /**
  * Adapter for processing Python code
  */

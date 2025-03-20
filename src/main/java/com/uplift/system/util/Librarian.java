@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  */
 public class Librarian {
     private Map<String, Object> registry;
-    private DoublyLinkedSet<String, Object> linkedRegistry;
+    protected DoublyLinkedSet<String, Object> linkedRegistry;
 
     /**
      * Constructs a new Librarian with initialized registry and linked data structures
@@ -85,7 +85,7 @@ public class Librarian {
      * @param value The object to summarize
      * @return A string summary
      */
-    private String summarizeValue(Object value) {
+    protected String summarizeValue(Object value) {
         if (value instanceof Map) {
             return "Contains " + ((Map<?, ?>) value).size() + " entries";
         } else if (value instanceof List) {
@@ -142,12 +142,14 @@ public class Librarian {
             private V value;
             private Node<K, V> prev;
             private Node<K, V> next;
+            private DoublyLinkedSet<K, V> nestedSet; // For hierarchical organization
             
             public Node(K key, V value) {
                 this.key = key;
                 this.value = value;
                 this.prev = null;
                 this.next = null;
+                this.nestedSet = null;
             }
             
             public K getKey() { return key; }
@@ -155,6 +157,9 @@ public class Librarian {
             public void setValue(V value) { this.value = value; }
             public Node<K, V> getPrev() { return prev; }
             public Node<K, V> getNext() { return next; }
+            public DoublyLinkedSet<K, V> getNestedSet() { return nestedSet; }
+            public void setNestedSet(DoublyLinkedSet<K, V> nestedSet) { this.nestedSet = nestedSet; }
+            public boolean hasNestedSet() { return nestedSet != null; }
         }
         
         /**
@@ -281,6 +286,56 @@ public class Librarian {
                     return node;
                 }
             };
+        }
+        
+        /**
+         * Create a nested set for hierarchical organization
+         * 
+         * @param key The key of the parent node
+         * @param nestedSet The nested set to attach
+         * @return true if successful, false if the key doesn't exist
+         */
+        public boolean createNestedSet(K key, DoublyLinkedSet<K, V> nestedSet) {
+            Node<K, V> node = nodeMap.get(key);
+            if (node == null) {
+                return false;
+            }
+            
+            node.setNestedSet(nestedSet);
+            return true;
+        }
+        
+        /**
+         * Traverse the hierarchy depth-first and apply the consumer to each node
+         * 
+         * @param consumer The consumer to apply to each node
+         */
+        public void traverseHierarchy(java.util.function.Consumer<Node<K, V>> consumer) {
+            traverseHierarchyHelper(head, consumer);
+        }
+        
+        /**
+         * Helper method for hierarchical traversal
+         * 
+         * @param startNode The node to start traversal from
+         * @param consumer The consumer to apply to each node
+         */
+        private void traverseHierarchyHelper(Node<K, V> startNode, java.util.function.Consumer<Node<K, V>> consumer) {
+            if (startNode == null) {
+                return;
+            }
+            
+            Node<K, V> current = startNode;
+            while (current != null) {
+                consumer.accept(current);
+                
+                // If there's a nested set, traverse it
+                if (current.hasNestedSet()) {
+                    current.getNestedSet().traverseHierarchy(consumer);
+                }
+                
+                current = current.next;
+            }
         }
     }
 }

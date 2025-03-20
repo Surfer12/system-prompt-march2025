@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import com.uplift.system.interop.adapters.EntityAdapter;
+import com.uplift.system.interop.EntityAdapter;
 
 /**
  * DataProcessor: Processes data between different entity adapters
