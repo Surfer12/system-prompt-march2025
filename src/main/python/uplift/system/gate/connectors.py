@@ -8,6 +8,7 @@ technological realms within the system.
 
 from typing import Any, Dict, Callable
 from abc import ABC, abstractmethod
+from uplift.system.gate import events
 
 class TechnologyConnector(ABC):
     """
