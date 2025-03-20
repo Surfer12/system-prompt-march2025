@@ -1,0 +1,1107 @@
+openapi: 3.0.0
+info:
+  title: Interoperability Data Management API
+  description: >-
+    Manage interoperability between java, swift, mojo, python, go and postgres.
+    This API allows for the creation, retrieval, updating, and deletion of data
+    entities, ensuring consistent data representation across different
+    programming languages and database systems.
+  version: 1.0.0
+paths:
+  /goEntities:
+    get:
+      description: Retrieve a list of Go entities.
+      parameters:
+        - description: The number of items to return per API request.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: >-
+            A page token received from a previous API request, used to request a
+            subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/GoEntity'
+                    type: array
+                  nextPageToken:
+                    type: string
+                type: object
+          description: A list of Go entities.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      tags:
+        - goentities
+    post:
+      description: Create a new Go entity.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoEntity'
+        description: Go entity to be created
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoEntity'
+          description: Go entity created successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      tags:
+        - goentities
+  /goEntities/{goEntityId}:
+    delete:
+      description: Deletes a specific Go entity identified by its ID.
+      operationId: deleteGoEntity
+      responses:
+        '204':
+          description: Go entity deleted successfully
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Go entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Delete a specific Go entity by ID
+      tags:
+        - goentities
+    get:
+      description: Retrieve a specific Go entity by ID.
+      operationId: getGoEntityById
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoEntity'
+          description: Successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Go entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      tags:
+        - goentities
+    parameters:
+      - description: ID of the Go entity to delete
+        in: path
+        name: goEntityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+    put:
+      description: >-
+        Update a specific Go entity by ID. The request body should contain the
+        updated GoEntity object.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GoEntity'
+        description: The updated GoEntity object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GoEntity'
+          description: Successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Go entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      tags:
+        - goentities
+  /javaEntities:
+    get:
+      description: >-
+        Retrieve a list of Java entities. This endpoint returns an array of
+        JavaEntity objects.
+      parameters:
+        - description: The number of items to return per API request.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: >-
+            A page token received from a previous API request, used to request a
+            subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/JavaEntity'
+                    type: array
+                  nextPageToken:
+                    type: string
+                type: object
+          description: A list of Java entities.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      tags:
+        - javaentities
+    post:
+      description: Create a new Java entity.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JavaEntity'
+        description: The JavaEntity object to create.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JavaEntity'
+          description: Java entity created successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      tags:
+        - javaentities
+  /javaEntities/{javaEntityId}:
+    delete:
+      description: Delete a specific Java entity by ID
+      operationId: deleteJavaEntity
+      responses:
+        '204':
+          description: Java entity deleted successfully
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Java entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Delete a specific Java entity by ID
+      tags:
+        - javaentities
+    get:
+      description: Retrieve a specific Java entity by ID.
+      operationId: getJavaEntityById
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JavaEntity'
+          description: Successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid ID supplied
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Java entity not found
+      tags:
+        - javaentities
+    parameters:
+      - description: ID of the Java entity to retrieve
+        in: path
+        name: javaEntityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+    put:
+      description: >-
+        Update a specific Java entity by ID. The request body should contain the
+        updated JavaEntity object.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JavaEntity'
+        description: The updated JavaEntity object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JavaEntity'
+          description: Successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Java entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      tags:
+        - javaentities
+  /mojoEntities:
+    get:
+      description: Retrieve a list of Mojo entities.
+      parameters:
+        - description: The number of items to return per API request.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: >-
+            A page token received from a previous API request, used to request a
+            subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/MojoEntity'
+                    type: array
+                  nextPageToken:
+                    type: string
+                type: object
+          description: A list of Mojo entities.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: An unexpected error occurred.
+      tags:
+        - mojoentities
+    post:
+      description: Create a new Mojo entity.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MojoEntity'
+        description: The MojoEntity object to create.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MojoEntity'
+          description: Mojo entity created successfully.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      tags:
+        - mojoentities
+  /mojoEntities/{mojoEntityId}:
+    delete:
+      description: Delete a specific Mojo entity by ID
+      operationId: deleteMojoEntity
+      responses:
+        '204':
+          description: Mojo entity deleted successfully
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Mojo entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Delete a specific Mojo entity by ID
+      tags:
+        - mojoentities
+    get:
+      description: Retrieve a specific Mojo entity by ID.
+      operationId: getMojoEntityById
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MojoEntity'
+          description: Successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid mojoEntityId
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Mojo entity not found
+      tags:
+        - mojoentities
+    parameters:
+      - description: ID of the Mojo entity to retrieve
+        in: path
+        name: mojoEntityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+    put:
+      description: >-
+        Update a specific Mojo entity by ID. The request body should contain the
+        updated MojoEntity object.
+      operationId: updateMojoEntity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MojoEntity'
+        description: Updated Mojo entity object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MojoEntity'
+          description: Successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Mojo entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Update a specific Mojo entity by ID
+      tags:
+        - mojoentities
+  /postgresEntities:
+    get:
+      description: Retrieve a list of PostgreSQL entities.
+      parameters:
+        - description: The number of items to return per API request.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: >-
+            A page token received from a previous API request, used to request a
+            subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/PostgresEntity'
+                    type: array
+                  nextPageToken:
+                    type: string
+                type: object
+          description: A list of PostgreSQL entities.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      tags:
+        - postgresentities
+    post:
+      description: Create a new PostgreSQL entity.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostgresEntity'
+        description: The PostgreSQL entity to create.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostgresEntity'
+          description: PostgreSQL entity created successfully.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      tags:
+        - postgresentities
+  /postgresEntities/{postgresEntityId}:
+    delete:
+      description: Delete a specific PostgreSQL entity by ID
+      operationId: deletePostgresEntities
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: PostgreSQL entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Delete a specific PostgreSQL entity by ID
+      tags:
+        - postgresentities
+    get:
+      description: Retrieve a specific PostgreSQL entity by ID.
+      operationId: getPostgresEntitiesById
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostgresEntity'
+          description: Successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid ID supplied
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: PostgreSQL entity not found
+      tags:
+        - postgresentities
+    parameters:
+      - description: ID of the PostgreSQL entity to retrieve
+        in: path
+        name: postgresEntityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+    put:
+      description: >-
+        Update a specific PostgreSQL entity by ID. The request body should
+        contain the updated PostgresEntity object.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostgresEntity'
+        description: The updated PostgresEntity object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostgresEntity'
+          description: Successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: PostgreSQL entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      tags:
+        - postgresentities
+  /pythonEntities:
+    get:
+      description: Retrieve a list of Python entities.
+      parameters:
+        - description: The number of items to return per API request.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: >-
+            A page token received from a previous API request, used to request a
+            subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/PythonEntity'
+                    type: array
+                  nextPageToken:
+                    type: string
+                type: object
+          description: A list of Python entities.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      tags:
+        - pythonentities
+    post:
+      description: Create a new Python entity.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PythonEntity'
+        description: The PythonEntity object to create.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PythonEntity'
+          description: Python entity created successfully.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      tags:
+        - pythonentities
+  /pythonEntities/{pythonEntityId}:
+    delete:
+      description: Delete a specific Python entity by ID
+      operationId: deletePythonEntity
+      responses:
+        '204':
+          description: Successful operation
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Python entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Delete a specific Python entity by ID
+      tags:
+        - pythonentities
+    get:
+      description: Retrieve a specific Python entity by ID.
+      operationId: getPythonEntityById
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PythonEntity'
+          description: Successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Python entity not found
+      tags:
+        - pythonentities
+    parameters:
+      - description: ID of the Python entity to delete
+        in: path
+        name: pythonEntityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+    put:
+      description: >-
+        Update a specific Python entity by ID. The request body should contain
+        the updated PythonEntity object.
+      operationId: updatePythonEntity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PythonEntity'
+        description: Updated Python entity object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PythonEntity'
+          description: Successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Python entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Update a specific Python entity by ID
+      tags:
+        - pythonentities
+  /swiftEntities:
+    get:
+      description: Retrieve a list of Swift entities.
+      parameters:
+        - description: The number of items to return per API request.
+          in: query
+          name: pageSize
+          schema:
+            type: integer
+        - description: >-
+            A page token received from a previous API request, used to request a
+            subsequent page.
+          in: query
+          name: pageToken
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  data:
+                    items:
+                      $ref: '#/components/schemas/SwiftEntity'
+                    type: array
+                  nextPageToken:
+                    type: string
+                type: object
+          description: A list of Swift entities.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Unexpected error
+      tags:
+        - swiftentities
+    post:
+      description: Create a new Swift entity.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SwiftEntity'
+        description: The Swift entity to create.
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SwiftEntity'
+          description: Swift entity created successfully.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      tags:
+        - swiftentities
+  /swiftEntities/{swiftEntityId}:
+    delete:
+      description: Delete a specific Swift entity by ID
+      operationId: deleteSwiftEntity
+      responses:
+        '204':
+          description: Swift entity deleted successfully
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Swift entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Delete a specific Swift entity by ID
+      tags:
+        - swiftentities
+    get:
+      description: Retrieve a specific Swift entity by ID.
+      operationId: getSwiftEntityById
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SwiftEntity'
+          description: Successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Swift entity not found
+      tags:
+        - swiftentities
+    parameters:
+      - description: ID of the Swift entity to retrieve
+        in: path
+        name: swiftEntityId
+        required: true
+        schema:
+          format: int64
+          type: integer
+    put:
+      description: >-
+        Update a specific Swift entity by ID. The request body should contain
+        the updated SwiftEntity object.
+      operationId: updateSwiftEntity
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SwiftEntity'
+        description: Updated Swift entity object
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SwiftEntity'
+          description: Successful operation
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Invalid input
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Swift entity not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+          description: Internal server error
+      summary: Update a specific Swift entity by ID
+      tags:
+        - swiftentities
+components:
+  schemas:
+    Error:
+      description: Error response object
+      properties:
+        code:
+          description: Error code
+          type: integer
+        message:
+          description: Error message
+          type: string
+      required:
+        - code
+        - message
+      type: object
+    GoEntity:
+      description: Represents a Go entity.
+      properties:
+        data:
+          description: Data associated with the Go entity
+          type: object
+        id:
+          description: Unique identifier for the Go entity
+          format: int64
+          type: integer
+        name:
+          description: Name of the Go entity
+          type: string
+      required:
+        - id
+        - name
+        - data
+      type: object
+    JavaEntity:
+      description: Represents a Java entity.
+      properties:
+        data:
+          additionalProperties: true
+          description: Data associated with the Java entity
+          properties: {}
+          type: object
+        id:
+          description: Unique identifier for the Java entity
+          readOnly: true
+          type: integer
+        name:
+          description: Name of the Java entity
+          type: string
+      required:
+        - name
+      type: object
+    MojoEntity:
+      description: Represents a Mojo entity.
+      properties:
+        data:
+          description: Data associated with the Mojo entity
+          type: object
+        id:
+          description: Unique identifier for the Mojo entity
+          format: int64
+          type: integer
+        name:
+          description: Name of the Mojo entity
+          type: string
+      required:
+        - id
+        - name
+        - data
+      type: object
+    PostgresEntity:
+      description: Represents a PostgreSQL entity.
+      properties:
+        data:
+          description: Data associated with the PostgreSQL entity
+          type: object
+        id:
+          description: Unique identifier for the PostgreSQL entity
+          format: int64
+          type: integer
+        name:
+          description: Name of the PostgreSQL entity
+          type: string
+      required:
+        - id
+        - name
+        - data
+      type: object
+    PythonEntity:
+      description: Represents a Python entity.
+      properties:
+        data:
+          description: Data associated with the Python entity
+          type: object
+        id:
+          description: Unique identifier for the Python entity
+          format: int64
+          type: integer
+        name:
+          description: Name of the Python entity
+          type: string
+      required:
+        - id
+        - name
+        - data
+      type: object
+    SwiftEntity:
+      description: Represents a Swift entity.
+      properties:
+        data:
+          description: Data associated with the Swift entity
+          type: object
+        id:
+          description: Unique identifier for the Swift entity
+          format: int64
+          type: integer
+        name:
+          description: Name of the Swift entity
+          type: string
+      required:
+        - id
+        - name
+        - data
+      type: object
