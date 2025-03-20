@@ -1,0 +1,14 @@
+components:
+  gate:
+    technologies:
+      - name: Java
+        role: Connector
+        version: 17
+      - name: C++
+        role: Connector
+        version: 20
+  creative_principles:
+    - fluid_emergence:
+        description: "Let ideas flow like rivers through the mind's landscape."
+    - recursive_reflection:
+        description: "Echoes of thought turning inward." 

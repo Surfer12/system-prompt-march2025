@@ -1,0 +1,10 @@
+connectors:
+  - technology: Java
+    class: com.uplift.system.gate.JavaConnector
+  - technology: C++
+    class: com.uplift.system.gate.CppConnector
+adapters:
+  - technology: Java
+    class: com.uplift.system.adapters.JavaAdapter
+  - technology: C++
+    class: com.uplift.system.adapters.CppAdapter

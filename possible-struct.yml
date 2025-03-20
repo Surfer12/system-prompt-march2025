@@ -1,0 +1,22 @@
+- src/main/java/com/uplift/system/
+  - gate/
+    - Connector.java (Interface)
+    - ConnectorFactory.java (Factory)
+    - JavaConnector.java (Implementation)
+    - CppConnector.java (Implementation)
+    - ...
+  - adapters/
+    - Adapter.java (Interface)
+    - AdapterFactory.java (Factory)
+    - JavaAdapter.java (Implementation)
+    - CppAdapter.java (Implementation)
+    - ...
+  - events/
+    - EventHandler.java (Interface)
+    - Event.java
+    - EventManager.java
+  - library/
+    - Librarian.java
+    - StoryTeller.java
+  - config/
+    - components.yaml (Configuration file)
