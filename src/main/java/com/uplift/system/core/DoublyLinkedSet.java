@@ -1,5 +1,8 @@
+package com.uplift.system.core;
+import java.util.*;
+
 // Add support for hierarchical nesting in DoublyLinkedSet
-public class DoublyLinkedSet<K, V> implements Iterable<DoublyLinkedSet.Node<K, V>> {
+public class DoublyLinkedSet<K, V> implements Iterable<DoublyLinkedSet.Node<K, V>>, Map<K, V> {
     // Existing implementation...
     
     /**

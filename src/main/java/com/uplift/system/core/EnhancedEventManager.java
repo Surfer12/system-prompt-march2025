@@ -1,3 +1,4 @@
+package com.uplift.system.core;
 public class EnhancedEventManager extends EventManager {
     // Priority queue for event processing based on importance/urgency
     private PriorityQueue<Event> priorityEventQueue;
