@@ -1,18 +1,26 @@
 package com.uplift.system.library;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+
+import com.uplift.system.util.Librarian;
+import com.uplift.system.util.Librarian.DoublyLinkedSet;
 
 /**
  * Story Teller: User Interaction Interface
  *
  * This module provides an interactive interface for users to explore
  * the system's metaphorical and technical narratives.
+ * Implements linked data structure concepts for traversing and presenting information.
  */
 public class StoryTeller {
 
     private Librarian librarian;
+    private DoublyLinkedSet<String, Object> storyElements;
 
     /**
      * Initialize the StoryTeller with an optional Librarian instance.
@@ -21,6 +29,8 @@ public class StoryTeller {
      */
     public StoryTeller(Librarian librarian) {
         this.librarian = (librarian != null) ? librarian : new Librarian();
+        this.storyElements = new DoublyLinkedSet<>();
+        initializeStoryElements();
     }
 
     /**
@@ -28,6 +38,65 @@ public class StoryTeller {
      */
     public StoryTeller() {
         this(new Librarian());
+    }
+
+    /**
+     * Initialize the story elements using the linked data structure approach
+     */
+    private void initializeStoryElements() {
+        // Add basic story elements using the doubly linked set structure
+        storyElements.add("introduction", "Welcome to the technological interoperability narrative");
+        storyElements.add("technologies", createTechnologiesList());
+        storyElements.add("principles", createPrinciplesList());
+        storyElements.add("conclusion", "The journey through technological realms continues...");
+    }
+
+    /**
+     * Create a list of technologies for story elements
+     */
+    private List<Map<String, Object>> createTechnologiesList() {
+        List<Map<String, Object>> technologies = new ArrayList<>();
+        
+        Map<String, Object> javaTech = new LinkedHashMap<>();
+        javaTech.put("name", "Java");
+        javaTech.put("role", "Enterprise backbone");
+        javaTech.put("version", "17");
+        technologies.add(javaTech);
+        
+        Map<String, Object> pythonTech = new LinkedHashMap<>();
+        pythonTech.put("name", "Python");
+        pythonTech.put("role", "Data processing");
+        pythonTech.put("version", "3.9");
+        technologies.add(pythonTech);
+        
+        Map<String, Object> mojoTech = new LinkedHashMap<>();
+        mojoTech.put("name", "Mojo");
+        mojoTech.put("role", "High performance computing");
+        mojoTech.put("version", "latest");
+        technologies.add(mojoTech);
+        
+        return technologies;
+    }
+
+    /**
+     * Create a list of principles for story elements
+     */
+    private List<Map<String, Object>> createPrinciplesList() {
+        List<Map<String, Object>> principles = new ArrayList<>();
+        
+        Map<String, Object> fluidEmergence = new LinkedHashMap<>();
+        Map<String, Object> fluidDetails = new LinkedHashMap<>();
+        fluidDetails.put("description", "Let ideas flow like rivers through the mind's landscape.");
+        fluidEmergence.put("fluid_emergence", fluidDetails);
+        principles.add(fluidEmergence);
+        
+        Map<String, Object> recursiveReflection = new LinkedHashMap<>();
+        Map<String, Object> recursiveDetails = new LinkedHashMap<>();
+        recursiveDetails.put("description", "Echoes of thought turning inward.");
+        recursiveReflection.put("recursive_reflection", recursiveDetails);
+        principles.add(recursiveReflection);
+        
+        return principles;
     }
 
     /**
@@ -46,9 +115,10 @@ public class StoryTeller {
             System.out.println("1. System Overview");
             System.out.println("2. Technology Gate Details");
             System.out.println("3. Creative Principles");
-            System.out.println("4. Exit");
+            System.out.println("4. Explore Story Elements (Bidirectional)");
+            System.out.println("5. Exit");
 
-            System.out.print("Enter your choice (1-4): ");
+            System.out.print("Enter your choice (1-5): ");
             String choice = scanner.nextLine();
 
             switch (choice) {
@@ -62,9 +132,13 @@ public class StoryTeller {
                     exploreCreativePrinciples();
                     break;
                 case "4":
+                    exploreStoryElements(scanner);
+                    break;
+                case "5":
                     System.out.println(
                         "Farewell, traveler of technological realms!"
                     );
+                    scanner.close();
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -73,21 +147,65 @@ public class StoryTeller {
     }
 
     /**
+     * Explore story elements using bidirectional traversal
+     */
+    private void exploreStoryElements(Scanner scanner) {
+        System.out.println("\n--- Story Elements Explorer ---");
+        System.out.println("Traversal Direction: 1. Forward  2. Backward  3. Return to Main Menu");
+        
+        String directionChoice = scanner.nextLine();
+        if ("3".equals(directionChoice)) {
+            return;
+        }
+        
+        boolean forward = "1".equals(directionChoice);
+        Iterator<DoublyLinkedSet.Node<String, Object>> iterator = 
+            forward ? storyElements.iterator() : storyElements.reverseIterator();
+        
+        System.out.println("\nTraversing elements " + (forward ? "forward" : "backward") + ":");
+        
+        while (iterator.hasNext()) {
+            DoublyLinkedSet.Node<String, Object> node = iterator.next();
+            System.out.println("\n== " + capitalize(node.getKey()) + " ==");
+            
+            if (node.getValue() instanceof String) {
+                System.out.println(node.getValue());
+            } else if (node.getValue() instanceof List) {
+                List<?> items = (List<?>) node.getValue();
+                System.out.println("Contains " + items.size() + " items:");
+                for (Object item : items) {
+                    if (item instanceof Map) {
+                        Map<?, ?> map = (Map<?, ?>) item;
+                        String name = map.containsKey("name") ? map.get("name").toString() : "Unnamed";
+                        String description = map.containsKey("description") ? map.get("description").toString() : "";
+                        System.out.println("- " + name + ": " + description);
+                    } else {
+                        System.out.println("- " + item);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Capitalize the first letter of a string
+     */
+    private String capitalize(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
+    }
+
+    /**
      * Explore and display details about system technologies.
      */
     private void exploreTechnologies() {
         Map<String, Object> registry = librarian.getRegistry();
-        Map<String, Object> components = (Map<
-                String,
-                Object
-            >) registry.getOrDefault("components", Map.of());
-        Map<String, Object> gate = (Map<
-                String,
-                Object
-            >) components.getOrDefault("gate", Map.of());
-        List<Map<String, Object>> technologies = (List<
-                Map<String, Object>
-            >) gate.getOrDefault("technologies", List.of());
+        Map<String, Object> components = (Map<String, Object>) registry.getOrDefault("components", Map.of());
+        Map<String, Object> gate = (Map<String, Object>) components.getOrDefault("gate", Map.of());
+        List<Map<String, Object>> technologies = (List<Map<String, Object>>) 
+            gate.getOrDefault("technologies", (List<Map<String, Object>>) storyElements.findByKey("technologies"));
 
         System.out.println("\n--- Technology Gate Details ---");
         for (Map<String, Object> tech : technologies) {
@@ -110,18 +228,14 @@ public class StoryTeller {
      */
     private void exploreCreativePrinciples() {
         Map<String, Object> registry = librarian.getRegistry();
-        List<Map<String, Object>> principles = (List<
-                Map<String, Object>
-            >) registry.getOrDefault("creative_principles", List.of());
+        List<Map<String, Object>> principles = (List<Map<String, Object>>) 
+            registry.getOrDefault("creative_principles", (List<Map<String, Object>>) storyElements.findByKey("principles"));
 
         System.out.println("\n--- Creative Principles ---");
         for (Map<String, Object> principle : principles) {
             for (Map.Entry<String, Object> entry : principle.entrySet()) {
                 String name = entry.getKey().replace("_", " ");
-                Map<String, Object> details = (Map<
-                        String,
-                        Object
-                    >) entry.getValue();
+                Map<String, Object> details = (Map<String, Object>) entry.getValue();
 
                 System.out.println(
                     "\n" +
