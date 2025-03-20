@@ -39,7 +39,7 @@ public class Librarian {
      * @param registryPath Path to the registry YAML file
      * @return Loaded registry configuration
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private Map<String, Object> loadRegistry(String registryPath) {
         try (FileInputStream inputStream = new FileInputStream(registryPath)) {
             Yaml yaml = new Yaml();
@@ -80,7 +80,7 @@ public class Librarian {
      *
      * @return Dynamically generated narrative snippet
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     private String generateRegistryBasedNarrative() {
         StringBuilder narrativeBuilder = new StringBuilder();
         
@@ -108,7 +108,7 @@ public class Librarian {
      * @param componentName Name of the component to retrieve
      * @return Component details from the registry
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public Map<String, Object> getComponentDetails(String componentName) {
         Map<String, Object> components = (Map<String, Object>) registry.getOrDefault("components", new HashMap<>());
         return (Map<String, Object>) components.getOrDefault(componentName, new HashMap<>());
