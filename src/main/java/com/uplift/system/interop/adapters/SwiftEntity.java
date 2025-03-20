@@ -2,7 +2,7 @@ package com.uplift.system.interop;
 
 import java.util.Map;
 
-public class SwiftEntity {
+public class MojoEntity {
     private Integer id;
     private String name;
     private Map<String, Object> data;
