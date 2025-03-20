@@ -254,7 +254,15 @@ heap property.
 are `n` such extractions.
    - Therefore, the overall time complexity is O(n log n)
     *   **Building the Heap:** O(n)
-    *   **Extracting Elements and Sorting:** O(n log n)
+    *   **Extracting Elements and Sorting:** O(n log n)**Lombok for Boilerplate Code Reduction**:
+  Lombok can simplify the creation of data classes by automatically generating getters, setters, 
+constructors, and more. While not directly needed here, it's a useful tool in larger projects to 
+keep code clean.
+
+This generic priority queue implementation is flexible and adaptable, making use of Java's powerful 
+features like generics and custom comparators, while also integrating well with other popular tools 
+for testing and code maintenance.
+
     *   **Overall Time Complexity:** O(n log n)
     *   **Space Complexity:** Heap sort is an in-place sorting algorithm, meaning it sorts the array directly within its original memory space without requiring significant extra memory allocation. The space complexity is O(1) (constant extra space).
 This generic implementation of heap sort works for any 
