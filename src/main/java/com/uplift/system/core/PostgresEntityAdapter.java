@@ -8,7 +8,6 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.sql.DataSource;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class PostgresEntityAdapter implements LanguageAdapter<PostgresEntity> {
     private final DataSource dataSource;
