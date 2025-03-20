@@ -11,6 +11,7 @@ import java.util.Scanner;
  * the system's metaphorical and technical narratives.
  */
 public class StoryTeller {
+
     private Librarian librarian;
 
     /**
@@ -26,7 +27,7 @@ public class StoryTeller {
      * Default constructor creating a new Librarian.
      */
     public StoryTeller() {
-        this(null);
+        this(new Librarian());
     }
 
     /**
@@ -36,7 +37,9 @@ public class StoryTeller {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Welcome to the Nested Librarian System");
-        System.out.println("Exploring the realms of technological interoperability...\n");
+        System.out.println(
+            "Exploring the realms of technological interoperability...\n"
+        );
 
         while (true) {
             System.out.println("Choose an exploration path:");
@@ -59,7 +62,9 @@ public class StoryTeller {
                     exploreCreativePrinciples();
                     break;
                 case "4":
-                    System.out.println("Farewell, traveler of technological realms!");
+                    System.out.println(
+                        "Farewell, traveler of technological realms!"
+                    );
                     return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -72,15 +77,31 @@ public class StoryTeller {
      */
     private void exploreTechnologies() {
         Map<String, Object> registry = librarian.getRegistry();
-        Map<String, Object> components = (Map<String, Object>) registry.getOrDefault("components", Map.of());
-        Map<String, Object> gate = (Map<String, Object>) components.getOrDefault("gate", Map.of());
-        List<Map<String, Object>> technologies = (List<Map<String, Object>>) gate.getOrDefault("technologies", List.of());
+        Map<String, Object> components = (Map<
+                String,
+                Object
+            >) registry.getOrDefault("components", Map.of());
+        Map<String, Object> gate = (Map<
+                String,
+                Object
+            >) components.getOrDefault("gate", Map.of());
+        List<Map<String, Object>> technologies = (List<
+                Map<String, Object>
+            >) gate.getOrDefault("technologies", List.of());
 
         System.out.println("\n--- Technology Gate Details ---");
         for (Map<String, Object> tech : technologies) {
-            System.out.println("\n" + tech.getOrDefault("name", "Unknown Technology") + " Technology:");
-            System.out.println("  Role: " + tech.getOrDefault("role", "Unspecified"));
-            System.out.println("  Version: " + tech.getOrDefault("version", "Unknown"));
+            System.out.println(
+                "\n" +
+                tech.getOrDefault("name", "Unknown Technology") +
+                " Technology:"
+            );
+            System.out.println(
+                "  Role: " + tech.getOrDefault("role", "Unspecified")
+            );
+            System.out.println(
+                "  Version: " + tech.getOrDefault("version", "Unknown")
+            );
         }
     }
 
@@ -89,16 +110,32 @@ public class StoryTeller {
      */
     private void exploreCreativePrinciples() {
         Map<String, Object> registry = librarian.getRegistry();
-        List<Map<String, Object>> principles = (List<Map<String, Object>>) registry.getOrDefault("creative_principles", List.of());
+        List<Map<String, Object>> principles = (List<
+                Map<String, Object>
+            >) registry.getOrDefault("creative_principles", List.of());
 
         System.out.println("\n--- Creative Principles ---");
         for (Map<String, Object> principle : principles) {
             for (Map.Entry<String, Object> entry : principle.entrySet()) {
                 String name = entry.getKey().replace("_", " ");
-                Map<String, Object> details = (Map<String, Object>) entry.getValue();
+                Map<String, Object> details = (Map<
+                        String,
+                        Object
+                    >) entry.getValue();
 
-                System.out.println("\n" + name.substring(0, 1).toUpperCase() + name.substring(1) + ":");
-                System.out.println("  " + details.getOrDefault("description", "No description available"));
+                System.out.println(
+                    "\n" +
+                    name.substring(0, 1).toUpperCase() +
+                    name.substring(1) +
+                    ":"
+                );
+                System.out.println(
+                    "  " +
+                    details.getOrDefault(
+                        "description",
+                        "No description available"
+                    )
+                );
             }
         }
     }
@@ -131,4 +168,4 @@ public class StoryTeller {
         StoryTeller storyTeller = new StoryTeller();
         storyTeller.interactiveNarrative();
     }
-} 
+}
